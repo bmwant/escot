@@ -16,3 +16,9 @@ $ pip install -r requirements.txt
 $ workon escot
 $ python runserver
 ``` 
+
+### Work manually with Telethon
+```
+$ pip install Telethon==1.1.1
+```
+See `scripts` directory and [docs](https://github.com/LonamiWebs/Telethon).

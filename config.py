@@ -4,6 +4,8 @@ import os
 
 TELEGRAM_BOT_TOKEN = ''
 CHAT_ID = ''
+TELEGRAM_API_ID = ''
+TELEGRAM_API_HASH = ''
 
 ###############################################################################
 

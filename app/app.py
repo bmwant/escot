@@ -19,9 +19,10 @@ async def index(request):
 
 async def fetch_price():
     while True:
-        logger.debug('Sending healthcheck...')
+        logger.debug('Checking current price...')
         price = await get_current_price()
-        message = 'Currentl  bitcoin price is {}$'.format(price)
+        message = 'Current  bitcoin price is {}$'.format(price)
+        logger.debug('Sending message to a channel...')
         await send_message(message)
         await asyncio.sleep(config.POLL_PERIOD)
 
