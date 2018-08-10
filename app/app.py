@@ -1,7 +1,6 @@
 import asyncio
 import base64
 
-
 import aiohttp
 import aiohttp_session
 from aiohttp import web
@@ -11,6 +10,7 @@ from cryptography import fernet
 import config
 from app.fetcher import get_current_price
 from app.notifier import send_message
+from app.utils import logger
 
 
 async def index(request):
@@ -21,7 +21,7 @@ async def fetch_price():
     while True:
         logger.debug('Sending healthcheck...')
         price = await get_current_price()
-        message = 'Current bitcoin price is {}$'.format(price)
+        message = 'Currentl  bitcoin price is {}$'.format(price)
         await send_message(message)
         await asyncio.sleep(config.POLL_PERIOD)
 
