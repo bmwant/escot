@@ -1,4 +1,5 @@
 import asyncio
+from http import HTTPStatus
 
 import aiohttp
 
@@ -17,15 +18,3 @@ async def send_message(message):
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params) as resp:
             print(resp.status)
-
-
-async def notify():
-    from fetcher import get_current_price
-    price = await get_current_price()
-    message = 'Current bitcoin price is {}$'.format(price)
-    await send_message(message)
-
-
-if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(notify())

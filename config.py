@@ -8,6 +8,10 @@ MINUTE = 60 * SECOND
 HOUR = 60 * MINUTE
 POLL_PERIOD = 15 * MINUTE
 
+
+DEFAULT_RUN_PORT = 8088
+
+
 # Override values from config_local.py
 try:
     import config_local
