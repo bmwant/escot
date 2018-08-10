@@ -1,6 +1,13 @@
 import os
 
 
+TELEGRAM_BOT_TOKEN = ''
+
+SECOND = 1
+MINUTE = 60 * SECOND
+HOUR = 60 * MINUTE
+POLL_PERIOD = 15 * MINUTE
+
 # Override values from config_local.py
 try:
     import config_local
