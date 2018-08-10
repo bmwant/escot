@@ -22,3 +22,11 @@ $ python runserver
 $ pip install Telethon==1.1.1
 ```
 See `scripts` directory and [docs](https://github.com/LonamiWebs/Telethon).
+
+
+### Deployment
+```
+$ cd deployment
+$ ansible-playbook -vv init.yml  # for the first time
+$ ansible-playbook update.yml  # when doing updates
+```
