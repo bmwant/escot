@@ -1,0 +1,7 @@
+---
+
+app_alias: "escot"
+project_root: "/data/projects/escot"
+repository_url: "git@github.com:bmwant/escot.git"
+repository_branch: "origin/master"
+exposed_port: 13888

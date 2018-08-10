@@ -1,0 +1,12 @@
+[program:{{ app_alias }}]
+environment=
+  HOME="/home/{{ ansible_ssh_user }}",
+  USER="{{ ansible_ssh_user }}",
+command=python runserver.py
+directory={{ project_root }}
+user={{ ansible_ssh_user }}
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/var/log/{{ app_alias }}.supervisor.stdout
+stopsignal=QUIT

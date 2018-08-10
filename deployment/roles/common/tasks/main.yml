@@ -1,0 +1,58 @@
+---
+
+- name: clone project repository
+  git:
+    repo: "{{ repository_url }}"
+    dest: "{{ project_root }}"
+    version: "{{ repository_branch }}"
+  become: true
+
+- name: set correct permissions on a project
+  file:
+    path: "{{ project_root }}"
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    recurse: yes
+  become: true
+
+- name: install pipenv
+  # assumptions
+  shell: "/usr/local/bin/pip3.6 install pipenv"
+  become: true
+
+- name: install python requirements
+  shell: "pipenv install"
+  args:
+    chdir: "{{ project_root }}"
+
+- name: render supervisor config
+  template:
+    src: templates/supervisor_app.conf.j2
+    dest: "{{ project_root }}/supervisor_{{ app_alias }}.conf"
+  notify: supervisor reload
+
+- name: render nginx config
+  template:
+    src: templates/nginx_app.conf.j2
+    dest: "{{ project_root }}/nginx_{{ app_alias }}.conf"
+  notify: nginx reload
+
+- name: ensure supervisor config linked
+  file:
+    src: "{{ project_root }}/supervisor_{{ app_alias }}.conf"
+    dest: /etc/supervisor/conf.d/{{ app_alias }}.conf
+    state: link
+  become: true
+
+- name: ensure nginx config linked
+  file:
+    src: "{{ project_root }}/nginx_{{ app_alias }}.conf"
+    dest: /etc/nginx/conf.d/{{ app_alias }}.conf
+    state: link
+  become: true
+
+- name: restart app with supervisor
+  command: "/bin/true"
+  notify:
+    - restart app
