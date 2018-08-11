@@ -33,8 +33,10 @@ class Transaction(Model):
     class Meta:
         database = db
 
-    date = DateTimeField(default=datetime.now)
     user = ForeignKeyField(User, backref='transactions')
+    date_opened = DateTimeField(default=datetime.now)
+    date_closed = DateTimeField(null=True)
     amount = DecimalField()
-    rate = DecimalField()
-    closed = BooleanField(default=False)
+    takeaway = DecimalField()
+    rate_opened = DecimalField()
+    rate_closed = DecimalField(null=True)

@@ -1,13 +1,5 @@
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/node_modules/siimple/dist/siimple.min.css">
-<div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--primary">
-  <div class="siimple-navbar-title">Admin panel</div>
-  <div class="siimple--float-right">
-    <div class="siimple-navbar-item">Profile</div>
-    <div class="siimple-navbar-item">Logout</div>
-  </div>
-</div>
+{% extends "base.html" %}
+{% block content %}
 <div class="siimple-content siimple-content--extra-large">
   <div class="siimple-grid">
     <div class="siimple-grid-row">
@@ -42,7 +34,7 @@
             {% endfor %}
           </div>
         </div>
-
+        {% include "modals/transaction.html" %}
         <div align="center" style="margin-bottom:0px;">
           <div class="siimple-card siimple--display-inline-block" style="max-width:33%;">
             <div class="siimple-card-header">Header</div>
@@ -96,6 +88,4 @@
     </div>
   </div>
 </div>
-<div class="siimple-footer siimple-footer--extra-large siimple-footer--dark">
-  &copy; 2018 <strong>Company name</strong>
-</div>
+{% endblock %}

@@ -1,9 +1,25 @@
 <!doctype html>
 <html>
 <head>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/node_modules/siimple/dist/siimple.min.css">
 </head>
 <body>
-
+{% block header %}
+  <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--primary">
+    <div class="siimple-navbar-title">Admin panel</div>
+    <div class="siimple--float-right">
+      <div class="siimple-navbar-item">Profile</div>
+      <div class="siimple-navbar-item">Logout</div>
+    </div>
+  </div>
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block footer %}
+  <div class="siimple-footer siimple-footer--extra-large siimple-footer--dark">
+    &copy; 2018 <strong>escot</strong>
+  </div>
+{% endblock %}
 </body>
 </html>

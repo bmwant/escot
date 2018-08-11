@@ -28,6 +28,11 @@
   args:
     chdir: "{{ project_root }}"
 
+- name: install npm requirements
+  npm:
+    path: "{{ project_root }}"
+    state: present
+
 - name: render supervisor config
   template:
     src: templates/supervisor_app.conf.j2

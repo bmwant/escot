@@ -21,13 +21,15 @@ def populate_test_data():
     trans1 = Transaction.create(
         user=user1,
         amount=150,
-        rate=6444.3,
+        takeaway=100,
+        rate_opened=6444.3,
     )
 
     trans2 = Transaction.create(
         user = user2,
         amount=100,
-        rate=6328.1,
+        takeaway=50,
+        rate_opened=6328.1,
     )
 
 
