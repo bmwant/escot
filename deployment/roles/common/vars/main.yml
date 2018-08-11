@@ -1,7 +1,9 @@
 ---
 
 app_alias: "escot"
-project_root: "/data/projects/escot/"
+project_root: "/data/projects/escot"
+venv_path: "/data/virtualenvs/escot"
 repository_url: "git@github.com:bmwant/escot.git"
 repository_branch: "origin/master"
 exposed_port: 13888
+app_run_port: 8883

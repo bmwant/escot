@@ -1,5 +1,5 @@
 upstream {{ app_alias }} {
-  server {{ app_run_host }}:{{ app_run_port }};
+  server 127.0.0.1:{{ app_run_port }};
 }
 
 server {

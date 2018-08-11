@@ -2,7 +2,8 @@
 environment=
   HOME="/home/{{ ansible_ssh_user }}",
   USER="{{ ansible_ssh_user }}",
-command=python runserver.py
+  PORT="{{ app_run_port }}"
+command={{ venv_path }}/bin/python runserver.py
 directory={{ project_root }}
 user={{ ansible_ssh_user }}
 autostart=true
