@@ -14,7 +14,11 @@ MINUTE = 60 * SECOND
 HOUR = 60 * MINUTE
 POLL_PERIOD = 15 * MINUTE
 
-
+DEBUG = False
+NOTIFICATIONS_ENABLED = True
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+APP_DIR = os.path.join(PROJECT_ROOT, 'app')
+TEMPLATES_DIR = os.path.join(APP_DIR, 'templates')
 DEFAULT_RUN_PORT = 8088
 
 

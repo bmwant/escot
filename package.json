@@ -1,0 +1,22 @@
+{
+  "name": "escot",
+  "version": "1.0.0",
+  "description": "Notify about cryptocurrency prices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmwant/escot.git"
+  },
+  "author": "Misha Behersky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bmwant/escot/issues"
+  },
+  "homepage": "https://github.com/bmwant/escot#readme",
+  "dependencies": {
+    "siimple": "^3.1.1"
+  }
+}

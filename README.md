@@ -17,15 +17,16 @@ $ workon escot
 $ python runserver
 ``` 
 
-### Work manually with Telethon
+### Launching auxiliary scripts
 ```
-$ pip install Telethon==1.1.1
+$ pip install -r requirements-dev.txt
 ```
 See `scripts` directory and [docs](https://github.com/LonamiWebs/Telethon).
 
 
 ### Deployment
 ```
+$ pip install -r requirements-dev.txt
 $ cd deployment
 $ ansible-playbook -vv init.yml  # for the first time
 $ ansible-playbook update.yml  # when doing updates

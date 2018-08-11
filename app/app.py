@@ -1,20 +1,19 @@
-import asyncio
+import os
 import base64
+import asyncio
 
-import aiohttp
+import jinja2
 import aiohttp_session
+import aiohttp_jinja2
 from aiohttp import web
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
 from cryptography import fernet
 
 import config
+from app import views
 from app.fetcher import get_current_price
 from app.notifier import send_message
 from app.utils import logger
-
-
-async def index(request):
-    return web.Response(text='List of transactions')
 
 
 async def fetch_price():
@@ -22,8 +21,9 @@ async def fetch_price():
         logger.debug('Checking current price...')
         price = await get_current_price()
         message = 'Current  bitcoin price is {}$'.format(price)
-        logger.debug('Sending message to a channel...')
-        await send_message(message)
+        if config.NOTIFICATIONS_ENABLED:
+            logger.debug('Sending message to a channel...')
+            await send_message(message)
         await asyncio.sleep(config.POLL_PERIOD)
 
 
@@ -32,7 +32,20 @@ async def start_polling_price(app):
 
 
 def setup_routes(app):
-    app.router.add_get('/', index)
+    app.router.add_get('/', views.index)
+
+
+def setup_static_routes(app):
+    app.router.add_static(
+        '/static/',
+        path=os.path.join(config.PROJECT_ROOT, 'static'),
+        name='static',
+    )
+    app.router.add_static(
+        '/node_modules/',
+        path=os.path.join(config.PROJECT_ROOT, 'node_modules'),
+        name='node_modules',
+    )
 
 
 def configure_app():
@@ -40,6 +53,11 @@ def configure_app():
     fernet_key = fernet.Fernet.generate_key()
     secret_key = base64.urlsafe_b64decode(fernet_key)
     aiohttp_session.setup(app, EncryptedCookieStorage(secret_key))
+    aiohttp_jinja2.setup(
+        app,
+        loader=jinja2.FileSystemLoader(config.TEMPLATES_DIR),
+    )
     setup_routes(app)
+    setup_static_routes(app)
     app.on_startup.append(start_polling_price)
     return app
