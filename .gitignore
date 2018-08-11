@@ -123,6 +123,7 @@ pip-selfcheck.json
 config_local.py
 *.session
 *.retry
+database.sqlite
 
 ### Node ###
 # Logs

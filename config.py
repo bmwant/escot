@@ -19,6 +19,7 @@ NOTIFICATIONS_ENABLED = True
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 APP_DIR = os.path.join(PROJECT_ROOT, 'app')
 TEMPLATES_DIR = os.path.join(APP_DIR, 'templates')
+DB_PATH = os.path.join(PROJECT_ROOT, 'database.sqlite')
 DEFAULT_RUN_PORT = 8088
 
 
