@@ -20,6 +20,9 @@
   args:
     creates: "{{ venv_path }}"
 
+- name: upgrade pip
+  shell: "{{ venv_path }}/bin/pip install --upgrade pip"
+
 - name: install python requirements
   shell: "{{ venv_path }}/bin/pip install -r requirements.txt"
   args:
