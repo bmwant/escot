@@ -1,6 +1,5 @@
 import os
 import base64
-import asyncio
 
 import jinja2
 import aiohttp_session
@@ -11,22 +10,17 @@ from cryptography import fernet
 
 import config
 from app import views, filters
-from app.fetcher import get_current_price
-from app.notifier import send_message
-from app.engine import check_transactions
+from app.tasks import fetch_price_task, check_transactions_task
 from app.utils import logger
 
 
-
-
-
 async def start_polling_price(app):
-    task = app.loop.create_task(fetch_price())
+    task = app.loop.create_task(fetch_price_task())
     app['tasks'].append(task)
 
 
-async def start_checkin_transactions(app):
-    task = app.loop.create_task(check_transactions())
+async def start_checking_transactions(app):
+    task = app.loop.create_task(check_transactions_task())
     app['tasks'].append(task)
 
 
@@ -74,5 +68,6 @@ def configure_app():
     setup_routes(app)
     setup_static_routes(app)
     app.on_startup.append(start_polling_price)
+    app.on_startup.append(start_checking_transactions)
     app.on_shutdown.append(close_tasks)
     return app
