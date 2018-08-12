@@ -42,12 +42,15 @@ class Transaction(Model):
     rate_opened = DecimalField()
     rate_closed = DecimalField(null=True)
 
+    def calculate_profit(self, new_rate):
+        coeff = self.amount / self.rate_opened
+        return coeff*new_rate - self.amount
+
     @property
     def profit(self):
         if not self.rate_closed:
             return 0
-        coeff = self.amount / self.rate_opened
-        return coeff*self.rate_closed - self.amount
+        return self.calculate_profit(self.rate_closed)
 
     @property
     def closed(self):

@@ -13,22 +13,20 @@ import config
 from app import views, filters
 from app.fetcher import get_current_price
 from app.notifier import send_message
+from app.engine import check_transactions
 from app.utils import logger
 
 
-async def fetch_price():
-    while True:
-        logger.debug('Checking current price...')
-        price = await get_current_price()
-        message = 'Current  bitcoin price is {}$'.format(price)
-        if config.NOTIFICATIONS_ENABLED:
-            logger.debug('Sending message to a channel...')
-            await send_message(message)
-        await asyncio.sleep(config.POLL_PERIOD)
+
 
 
 async def start_polling_price(app):
     task = app.loop.create_task(fetch_price())
+    app['tasks'].append(task)
+
+
+async def start_checkin_transactions(app):
+    task = app.loop.create_task(check_transactions())
     app['tasks'].append(task)
 
 
