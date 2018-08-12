@@ -34,7 +34,7 @@ async def start_polling_price(app):
 def setup_routes(app):
     app.router.add_get('/', views.index)
     app.router.add_post('/transaction/add', views.transaction_add)
-    app.router.add_get('/transaction/{tid}/close', views.transaction_close)
+    app.router.add_get('/transaction/close', views.transaction_close)
 
 
 def setup_static_routes(app):

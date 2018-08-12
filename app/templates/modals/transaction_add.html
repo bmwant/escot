@@ -2,9 +2,10 @@
   <div class="siimple-form">
     <div class="siimple-form-field">
       <label class="siimple-label">Select user</label>
-      <select name="user_id" class="siimple-select">
-        <option value="1" selected>Misha</option>
-        <option value="2">Vlad</option>
+      <select name="user_id" class="siimple-select siimple-select--fluid">
+        {% for user in users %}
+          <option value="{{ user.id }}">{{ user.name }}</option>
+        {% endfor %}
       </select>
     </div>
 
@@ -24,14 +25,43 @@
     </div>
 
     <div class="siimple-form-field">
-      <div id="tad" class="siimple-btn siimple-btn--blue">Add</div>
+      <div id="tadd" class="siimple-btn siimple-btn--blue">Add</div>
+    </div>
+
+    <div class="siimple-form-field">
+      <div class="siimple-btn siimple-btn--fluid siimple-btn--success">
+        eP: <span id="profit-value">?</span>
+      </div>
     </div>
   </div>
 </form>
 <script>
 $(document).ready(function() {
-  $('#tad').click(function() {
+  $('#tadd').click(function() {
     $(this).closest('form').submit();
-  })
+  });
+
+  var rateInput = $('input[name="rate_opened"]'),
+    diffInput = $('input[name="diff"]'),
+    amountInput = $('input[name="amount"]');
+
+  var updateProfit = function() {
+    // console.log('here');
+    var rateOpened = parseFloat(rateInput.val());
+    var diff = parseFloat(diffInput.val());
+    var amount = parseFloat(amountInput.val());
+    if(isNaN(rateOpened) || isNaN(diff) || isNaN(amount)) {
+      $('#profit-value').text('?');
+      return;
+    }
+    var rateClosed = rateOpened + diff,
+      newAmount = amount*rateClosed/rateOpened;
+    var profit = (newAmount - amount).toFixed(2);
+    $('#profit-value').text(profit + '$');
+  };
+
+  rateInput.on('keyup', updateProfit);
+  diffInput.on('keyup', updateProfit);
+  amountInput.on('keyup', updateProfit);
 });
 </script>

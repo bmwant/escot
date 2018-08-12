@@ -9,7 +9,10 @@ from app.database import Transaction, User
 async def index(request):
     records = Transaction.select()
     users = User.select()
-    return {'records': records}
+    return {
+        'users': users,
+        'records': records,
+    }
 
 
 
@@ -27,14 +30,15 @@ async def transaction_add(request):
         rate_opened=rate_opened,
     )
     print(t.user)
-    return web.Response(text='ok')
+    return web.HTTPFound('/')
 
 
 async def transaction_close(request):
-    tid = request.match_info.get('tid')
+    # tid = request.match_info.get('tid')
+    tid = request.query.get('tid')
     rate_closed = request.query.get('rate_closed')
     transaction = Transaction.get(Transaction.id == tid)
     transaction.date_closed = datetime.now()
     transaction.rate_closed = rate_closed
     transaction.save()
-    return web.Response(text='ok')
+    return web.HTTPFound('/')
