@@ -10,7 +10,7 @@ from aiohttp_session.cookie_storage import EncryptedCookieStorage
 from cryptography import fernet
 
 import config
-from app import views
+from app import views, filters
 from app.fetcher import get_current_price
 from app.notifier import send_message
 from app.utils import logger
@@ -33,6 +33,8 @@ async def start_polling_price(app):
 
 def setup_routes(app):
     app.router.add_get('/', views.index)
+    app.router.add_post('/transaction/add', views.transaction_add)
+    app.router.add_get('/transaction/{tid}/close', views.transaction_close)
 
 
 def setup_static_routes(app):
@@ -56,6 +58,11 @@ def configure_app():
     aiohttp_jinja2.setup(
         app,
         loader=jinja2.FileSystemLoader(config.TEMPLATES_DIR),
+        filters={
+            'checkbox': filters.checkbox,
+            'format_time': filters.format_time,
+            'format_datetime': filters.format_datetime,
+        },
     )
     setup_routes(app)
     setup_static_routes(app)

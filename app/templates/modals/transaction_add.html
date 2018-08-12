@@ -1,0 +1,37 @@
+<form method="post" action="/transaction/add">
+  <div class="siimple-form">
+    <div class="siimple-form-field">
+      <label class="siimple-label">Select user</label>
+      <select name="user_id" class="siimple-select">
+        <option value="1" selected>Misha</option>
+        <option value="2">Vlad</option>
+      </select>
+    </div>
+
+    <div class="siimple-form-field">
+      <div class="siimple-form-field-label">Amount (USD)</div>
+      <input name="amount" type="text" class="siimple-input siimple-input--fluid" placeholder="100">
+    </div>
+
+    <div class="siimple-form-field">
+      <div class="siimple-form-field-label">Rate opened (USD)</div>
+      <input name="rate_opened" type="text" class="siimple-input siimple-input--fluid" placeholder="6543.21">
+    </div>
+
+    <div class="siimple-form-field">
+      <div class="siimple-form-field-label">Desired price diff (USD)</div>
+      <input name="diff" type="text" class="siimple-input siimple-input--fluid" placeholder="200">
+    </div>
+
+    <div class="siimple-form-field">
+      <div id="tad" class="siimple-btn siimple-btn--blue">Add</div>
+    </div>
+  </div>
+</form>
+<script>
+$(document).ready(function() {
+  $('#tad').click(function() {
+    $(this).closest('form').submit();
+  })
+});
+</script>

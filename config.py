@@ -12,9 +12,14 @@ TELEGRAM_API_HASH = ''
 SECOND = 1
 MINUTE = 60 * SECOND
 HOUR = 60 * MINUTE
-POLL_PERIOD = 15 * MINUTE
+DEFAULT_DATE_FORMAT = '%d/%m/%y'
+DEFAULT_TIME_FORMAT = '%H:%M'
+DEFAULT_DATETIME_FORMAT = '{} {}'.format(DEFAULT_TIME_FORMAT,
+                                         DEFAULT_DATE_FORMAT)
 
 DEBUG = False
+
+POLL_PERIOD = 15 * MINUTE
 NOTIFICATIONS_ENABLED = True
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 APP_DIR = os.path.join(PROJECT_ROOT, 'app')

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/bmwant/escot#readme",
   "dependencies": {
+    "jquery": "^3.3.1",
     "siimple": "^3.1.1"
   }
 }

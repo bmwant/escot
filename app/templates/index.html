@@ -13,47 +13,53 @@
         <div class="siimple-table siimple-table--striped">
           <div class="siimple-table-header">
             <div class="siimple-table-row">
-              <div class="siimple-table-cell">Date</div>
+              <div class="siimple-table-cell">ID</div>
+              <div class="siimple-table-cell">Open</div>
+              <div class="siimple-table-cell">Close</div>
               <div class="siimple-table-cell">User</div>
               <div class="siimple-table-cell">Amount</div>
-              <div class="siimple-table-cell">Rate</div>
-              <div class="siimple-table-cell">Expected profit</div>
+              <div class="siimple-table-cell">Rate open/rate closed</div>
+              <div class="siimple-table-cell">Diff</div>
+              <div class="siimple-table-cell">Profit</div>
               <div class="siimple-table-cell">Closed</div>
             </div>
           </div>
           <div class="siimple-table-body">
             {% for record in records %}
             <div class="siimple-table-row">
-              <div class="siimple-table-cell">{{ record.date }}</div>
+              <div class="siimple-table-cell">#{{ record.id }}</div>
+              <div class="siimple-table-cell">{{ record.date_opened | format_datetime }}</div>
+              <div class="siimple-table-cell">{{ record.date_closed | format_datetime }}</div>
               <div class="siimple-table-cell">{{ record.user }}</div>
               <div class="siimple-table-cell">{{ record.amount }}</div>
-              <div class="siimple-table-cell">{{ record.rate }}</div>
-              <div class="siimple-table-cell">?</div>
-              <div class="siimple-table-cell">{{ record.closed }}</div>
+              <div class="siimple-table-cell">
+                {{ record.rate_opened }}
+                {% if record.rate_closed %}
+                  /{{ rate_closed }}
+                {% endif %}
+              </div>
+              <div class="siimple-table-cell">{{ record.diff }}</div>
+              <div class="siimple-table-cell">{{ record.profit }}</div>
+              <div class="siimple-table-cell">i</div>
             </div>
             {% endfor %}
           </div>
         </div>
-        {% include "modals/transaction.html" %}
-        <div align="center" style="margin-bottom:0px;">
+        <div align="center">
           <div class="siimple-card siimple--display-inline-block" style="max-width:33%;">
-            <div class="siimple-card-header">Header</div>
+            <div class="siimple-card-header">Add transaction</div>
             <div class="siimple-card-body" align="left">
-              <div class="siimple-paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div class="siimple-btn siimple-btn--fluid siimple-btn--success">Manage</div>
+              {% include "modals/transaction_add.html" %}
             </div>
           </div>
+
           <div class="siimple-card siimple--display-inline-block" style="max-width:33%;">
-            <div class="siimple-card-header">Header</div>
+            <div class="siimple-card-header">Close transaction</div>
             <div class="siimple-card-body" align="left">
-              <div class="siimple-paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </div>
-              <div class="siimple-btn siimple-btn--fluid siimple-btn--success">Manage</div>
+              {% include "modals/transaction_close.html" %}
             </div>
           </div>
+
           <div class="siimple-card siimple--display-inline-block" style="max-width:33%;">
             <div class="siimple-card-header">Header</div>
             <div class="siimple-card-body" align="left">

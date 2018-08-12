@@ -33,10 +33,19 @@ class Transaction(Model):
     class Meta:
         database = db
 
+    id = AutoField()
     user = ForeignKeyField(User, backref='transactions')
     date_opened = DateTimeField(default=datetime.now)
     date_closed = DateTimeField(null=True)
     amount = DecimalField()
-    takeaway = DecimalField()
+    diff = DecimalField()
     rate_opened = DecimalField()
     rate_closed = DecimalField(null=True)
+
+    @property
+    def profit(self):
+        if not self.rate_closed:
+            return 0
+        coeff = self.amount / self.rate_opened
+        return coeff*self.rate_closed - self.amount
+
