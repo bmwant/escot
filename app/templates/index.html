@@ -41,7 +41,11 @@
               </div>
               <div class="siimple-table-cell">{{ record.diff | round(2) }}</div>
               <div class="siimple-table-cell">{{ record.profit | round(2) }}</div>
-              <div class="siimple-table-cell">{{ record.closed }}</div>
+              <div class="siimple-table-cell">
+                {% if record.closed %}
+                  <i class="fa fa-check-square" aria-hidden="true"></i>
+                {% endif %}
+              </div>
               <div class="siimple-table-cell">
                 <a href="/transaction/{{ record.id }}/delete">
                   <i class="fa fa-times" aria-hidden="true"></i>
