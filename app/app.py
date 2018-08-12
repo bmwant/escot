@@ -28,7 +28,14 @@ async def fetch_price():
 
 
 async def start_polling_price(app):
-    app.loop.create_task(fetch_price())
+    task = app.loop.create_task(fetch_price())
+    app['tasks'].append(task)
+
+
+async def close_tasks(app):
+    for task in app.get('tasks', []):
+        logger.debug('Cancelling task %s...', task._coro.__name__)
+        task.cancel()
 
 
 def setup_routes(app):
@@ -52,6 +59,8 @@ def setup_static_routes(app):
 
 def configure_app():
     app = web.Application()
+    app['tasks'] = []
+    app['logger'] = logger
     fernet_key = fernet.Fernet.generate_key()
     secret_key = base64.urlsafe_b64decode(fernet_key)
     aiohttp_session.setup(app, EncryptedCookieStorage(secret_key))
@@ -67,4 +76,5 @@ def configure_app():
     setup_routes(app)
     setup_static_routes(app)
     app.on_startup.append(start_polling_price)
+    app.on_shutdown.append(close_tasks)
     return app
