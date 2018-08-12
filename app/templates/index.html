@@ -22,6 +22,7 @@
               <div class="siimple-table-cell">Diff</div>
               <div class="siimple-table-cell">Profit</div>
               <div class="siimple-table-cell">Closed</div>
+              <div class="siimple-table-cell">Actions</div>
             </div>
           </div>
           <div class="siimple-table-body">
@@ -41,6 +42,11 @@
               <div class="siimple-table-cell">{{ record.diff | round(2) }}</div>
               <div class="siimple-table-cell">{{ record.profit | round(2) }}</div>
               <div class="siimple-table-cell">{{ record.closed }}</div>
+              <div class="siimple-table-cell">
+                <a href="/transaction/{{ record.id }}/delete">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
             {% endfor %}
           </div>

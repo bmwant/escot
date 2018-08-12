@@ -42,3 +42,10 @@ async def transaction_close(request):
     transaction.rate_closed = rate_closed
     transaction.save()
     return web.HTTPFound('/')
+
+
+async def transaction_delete(request):
+    tid = request.match_info.get('tid')
+    transaction = Transaction.get(Transaction.id == tid)
+    transaction.delete_instance()
+    return web.HTTPFound('/')
