@@ -49,3 +49,6 @@ class Transaction(Model):
         coeff = self.amount / self.rate_opened
         return coeff*self.rate_closed - self.amount
 
+    @property
+    def closed(self):
+        return self.date_closed is not None

@@ -30,7 +30,7 @@
               <div class="siimple-table-cell">#{{ record.id }}</div>
               <div class="siimple-table-cell">{{ record.date_opened | format_datetime }}</div>
               <div class="siimple-table-cell">{{ record.date_closed | format_datetime }}</div>
-              <div class="siimple-table-cell">{{ record.user }}</div>
+              <div class="siimple-table-cell">{{ record.user.name }}</div>
               <div class="siimple-table-cell">{{ record.amount | round(2) }}</div>
               <div class="siimple-table-cell">
                 {{ record.rate_opened | round(2) }}
@@ -40,7 +40,7 @@
               </div>
               <div class="siimple-table-cell">{{ record.diff | round(2) }}</div>
               <div class="siimple-table-cell">{{ record.profit | round(2) }}</div>
-              <div class="siimple-table-cell">i</div>
+              <div class="siimple-table-cell">{{ record.closed }}</div>
             </div>
             {% endfor %}
           </div>
