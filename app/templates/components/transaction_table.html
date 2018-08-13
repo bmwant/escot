@@ -6,8 +6,8 @@
       <div class="siimple-table-cell">Close</div>
       <div class="siimple-table-cell">User</div>
       <div class="siimple-table-cell">Amount</div>
-      <div class="siimple-table-cell">Rate open/rate closed</div>
-      <div class="siimple-table-cell">Diff</div>
+      <div class="siimple-table-cell">Rate O/C</div>
+      <div class="siimple-table-cell">Diff E/A</div>
       <div class="siimple-table-cell">Profit</div>
       <div class="siimple-table-cell">Closed</div>
       <div class="siimple-table-cell">Actions</div>
@@ -24,10 +24,15 @@
       <div class="siimple-table-cell">
         {{ record.rate_opened | round(2) }}
         {% if record.rate_closed %}
-        /{{ record.rate_closed | round(2) }}
+          /{{ record.rate_closed | round(2) }}
         {% endif %}
       </div>
-      <div class="siimple-table-cell">{{ record.diff | round(2) }}</div>
+      <div class="siimple-table-cell">
+        {{ record.diff | round(2) }}
+        {% if record.closed %}
+          /{{ record.diff_actual | round(2) }}
+        {% endif %}
+      </div>
       <div class="siimple-table-cell">{{ record.profit | round(2) }}</div>
       <div class="siimple-table-cell">
         {% if record.closed %}

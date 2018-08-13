@@ -56,3 +56,7 @@ class Transaction(Model):
     @property
     def closed(self):
         return self.date_closed is not None
+
+    @property
+    def diff_actual(self):
+        return self.rate_closed - self.rate_opened
