@@ -18,6 +18,6 @@ async def check_transactions():
         if current_price > price_treshold:
             profit = t.calculate_profit(current_price)
             message = f'User {t.user.name} need to close his transaction ' \
-                      f'#{t.id} to gain {profit}$'
+                      f'#{t.id} to gain {profit:.2f}$'
             logger.info('Transaction #%s should be closed', t.id)
             await send_message(message)

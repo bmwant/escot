@@ -11,7 +11,7 @@ async def fetch_price_task():
     while True:
         logger.debug('Checking current price...')
         price = await get_current_price()
-        message = 'Current  bitcoin price is {}$'.format(price)
+        message = 'Current  bitcoin price is {:.2f}$'.format(price)
         if config.NOTIFICATIONS_ENABLED:
             logger.debug('Sending message to a channel...')
             await send_message(message)
