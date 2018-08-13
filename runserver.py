@@ -11,7 +11,7 @@ def run():
     uprint = partial(print, flush=True)
     port = int(os.environ.get('PORT', config.DEFAULT_RUN_PORT))
     app = configure_app()
-    web.run_app(app, print=uprint, port=port)
+    web.run_app(app, print=uprint, host=config.DEFAULT_RUN_HOST, port=port)
 
 
 if __name__ == '__main__':

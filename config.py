@@ -27,6 +27,7 @@ APP_DIR = os.path.join(PROJECT_ROOT, 'app')
 TEMPLATES_DIR = os.path.join(APP_DIR, 'templates')
 DB_PATH = os.path.join(PROJECT_ROOT, 'database.sqlite')
 DEFAULT_RUN_PORT = 8088
+DEFAULT_RUN_HOST = '127.0.0.1'
 
 
 # Override values from config_local.py
