@@ -1,4 +1,5 @@
 from datetime import datetime
+from decimal import Decimal
 
 from peewee import SqliteDatabase
 from peewee import (
@@ -42,12 +43,12 @@ class Transaction(Model):
     rate_opened = DecimalField()
     rate_closed = DecimalField(null=True)
 
-    def calculate_profit(self, new_rate):
+    def calculate_profit(self, new_rate: Decimal) -> Decimal:
         coeff = self.amount / self.rate_opened
         return coeff*new_rate - self.amount
 
     @property
-    def profit(self):
+    def profit(self) -> float:
         if not self.rate_closed:
             return 0
         return self.calculate_profit(self.rate_closed)
